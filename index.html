@@ -560,7 +560,7 @@ document.addEventListener('mousemove', e => {
       let aktifSes = killSesleri[tiklamaSayisi];
       aktifSes.currentTime = 0; 
       
-      // Hata Yakalama (Try-Catch mantığı): Ses çalınamazsa kodu durdurma, sadece konsola yaz.
+      
       aktifSes.play().catch(hata => {
         console.warn("Ses yüklenemedi veya tarayıcı engelledi: ", hata);
       });
