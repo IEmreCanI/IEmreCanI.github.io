@@ -543,5 +543,48 @@ document.addEventListener('mousemove', e => {
       console.log("%cSelam! Kodların arkasına bakmayı sevdiğini görebiliyorum.", "color: #00ff00; font-size: 16px; font-weight: bold; background: #000; padding: 10px; border-radius: 5px;");
       console.log("Yeni projeler, sistem altyapıları veya teknik işbirlikleri için: iletisim@ecdogan.com");
 </script>
+<style>
+      .siber-sarsinti {
+        animation: sarsilma 0.4s;
+        animation-iteration-count: infinite;
+        filter: invert(1) hue-rotate(180deg);
+      }
+      @keyframes sarsilma {
+        0% { transform: translate(2px, 1px) rotate(0deg); }
+        10% { transform: translate(-1px, -2px) rotate(-1deg); }
+        20% { transform: translate(-3px, 0px) rotate(1deg); }
+        30% { transform: translate(3px, 2px) rotate(0deg); }
+        40% { transform: translate(1px, -1px) rotate(1deg); }
+        50% { transform: translate(-1px, 2px) rotate(-1deg); }
+        60% { transform: translate(-3px, 1px) rotate(0deg); }
+        70% { transform: translate(3px, 1px) rotate(-1deg); }
+        80% { transform: translate(-1px, -1px) rotate(1deg); }
+        90% { transform: translate(1px, 2px) rotate(0deg); }
+        100% { transform: translate(1px, -2px) rotate(-1deg); }
+      }
+    </style>
+
+    <script>
+      let tiklamaSayisi = 0;
+      let tiklamaZamanlayici;
+
+      document.addEventListener('click', () => {
+        tiklamaSayisi++;
+        clearTimeout(tiklamaZamanlayici);
+        
+        tiklamaZamanlayici = setTimeout(() => { tiklamaSayisi = 0; }, 1000); 
+
+        if (tiklamaSayisi === 5) {
+          document.body.classList.add('siber-sarsinti');
+          
+          setTimeout(() => {
+            document.body.classList.remove('siber-sarsinti');
+            alert("🔥 PLATİNUM ELO REFLEKSLERİ! VALORANT ACE! 🔥");
+          }, 1500); 
+          
+          tiklamaSayisi = 0; 
+        }
+      });
+</script>
 </body>
 </html>
