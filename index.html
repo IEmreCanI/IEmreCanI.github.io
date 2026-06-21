@@ -546,7 +546,6 @@ document.addEventListener('mousemove', e => {
   let tiklamaSayisi = 0;
   let tiklamaZamanlayici;
   
-  
   const killSesleri = [
     new Audio('kill1.mp3'),
     new Audio('kill2.mp3'),
@@ -556,25 +555,22 @@ document.addEventListener('mousemove', e => {
   ];
 
   document.addEventListener('click', () => {
-    
     if (tiklamaSayisi < 5) {
-      
       let aktifSes = killSesleri[tiklamaSayisi];
-      
-     
       aktifSes.currentTime = 0; 
-      aktifSes.play();
+      
+      // Hata Yakalama (Try-Catch mantığı): Ses çalınamazsa kodu durdurma, sadece konsola yaz.
+      aktifSes.play().catch(hata => {
+        console.warn("Ses yüklenemedi veya tarayıcı engelledi: ", hata);
+      });
       
       tiklamaSayisi++;
     }
 
-    
     clearTimeout(tiklamaZamanlayici);
     
-  
     tiklamaZamanlayici = setTimeout(() => { tiklamaSayisi = 0; }, 1500); 
 
-    
     if (tiklamaSayisi === 5) {
       document.body.classList.add('siber-sarsinti');
       
@@ -583,7 +579,6 @@ document.addEventListener('mousemove', e => {
         alert("🔥 ACE! 🔥");
       }, 1500); 
       
-     
       tiklamaSayisi = 0; 
     }
   });
