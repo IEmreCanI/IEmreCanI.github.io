@@ -542,49 +542,51 @@ document.addEventListener('mousemove', e => {
 <script>
       console.log("%cSelam! Kodların arkasına bakmayı sevdiğini görebiliyorum.", "color: #00ff00; font-size: 16px; font-weight: bold; background: #000; padding: 10px; border-radius: 5px;");
       console.log("Yeni projeler, sistem altyapıları veya teknik işbirlikleri için: iletisim@ecdogan.com");
-</script>
-<style>
-      .siber-sarsinti {
-        animation: sarsilma 0.4s;
-        animation-iteration-count: infinite;
-        filter: invert(1) hue-rotate(180deg);
-      }
-      @keyframes sarsilma {
-        0% { transform: translate(2px, 1px) rotate(0deg); }
-        10% { transform: translate(-1px, -2px) rotate(-1deg); }
-        20% { transform: translate(-3px, 0px) rotate(1deg); }
-        30% { transform: translate(3px, 2px) rotate(0deg); }
-        40% { transform: translate(1px, -1px) rotate(1deg); }
-        50% { transform: translate(-1px, 2px) rotate(-1deg); }
-        60% { transform: translate(-3px, 1px) rotate(0deg); }
-        70% { transform: translate(3px, 1px) rotate(-1deg); }
-        80% { transform: translate(-1px, -1px) rotate(1deg); }
-        90% { transform: translate(1px, 2px) rotate(0deg); }
-        100% { transform: translate(1px, -2px) rotate(-1deg); }
-      }
-    </style>
+<script>
+  let tiklamaSayisi = 0;
+  let tiklamaZamanlayici;
+  
+  // 5 farklı sesi bir dizi (array) içine alıyoruz
+  const killSesleri = [
+    new Audio('kill1.mp3'),
+    new Audio('kill2.mp3'),
+    new Audio('kill3.mp3'),
+    new Audio('kill4.mp3'),
+    new Audio('ace.mp3') 
+  ];
 
-    <script>
-      let tiklamaSayisi = 0;
-      let tiklamaZamanlayici;
+  document.addEventListener('click', () => {
+    // Tıklama limitini aşmamak için kontrol
+    if (tiklamaSayisi < 5) {
+      // O anki tıklama sırasına denk gelen sesi seç
+      let aktifSes = killSesleri[tiklamaSayisi];
+      
+      // Hızlı tıklanırsa sesin bitmesini beklemeden baştan başlat (oyun hissiyatı için kritik)
+      aktifSes.currentTime = 0; 
+      aktifSes.play();
+      
+      tiklamaSayisi++;
+    }
 
-      document.addEventListener('click', () => {
-        tiklamaSayisi++;
-        clearTimeout(tiklamaZamanlayici);
-        
-        tiklamaZamanlayici = setTimeout(() => { tiklamaSayisi = 0; }, 1000); 
+    // Zamanlayıcıyı sıfırla (combo süresi)
+    clearTimeout(tiklamaZamanlayici);
+    
+    // Eğer 1.5 saniye boyunca yeni tıklama gelmezse comboyu (sayacı) sıfırla
+    tiklamaZamanlayici = setTimeout(() => { tiklamaSayisi = 0; }, 1500); 
 
-        if (tiklamaSayisi === 5) {
-          document.body.classList.add('siber-sarsinti');
-          
-          setTimeout(() => {
-            document.body.classList.remove('siber-sarsinti');
-            alert("🔥 ACE! 🔥");
-          }, 1500); 
-          
-          tiklamaSayisi = 0; 
-        }
-      });
+    // 5. tıklamaya (ACE) ulaşıldığında efektleri tetikle
+    if (tiklamaSayisi === 5) {
+      document.body.classList.add('siber-sarsinti');
+      
+      setTimeout(() => {
+        document.body.classList.remove('siber-sarsinti');
+        alert("🔥 ACE! 🔥");
+      }, 1500); 
+      
+      // Efekt bittikten sonra tekrar tıklanabilmesi için sayacı sıfırla
+      tiklamaSayisi = 0; 
+    }
+  });
 </script>
 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" style="position: fixed; bottom: 0; right: 0; width: 5px; height: 5px; opacity: 0; z-index: 9999; cursor: default;"></a>
 </body>
