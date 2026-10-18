@@ -543,47 +543,7 @@ document.addEventListener('mousemove', e => {
       console.log("%cSelam! Kodların arkasına bakmayı sevdiğini görebiliyorum.", "color: #00ff00; font-size: 16px; font-weight: bold; background: #000; padding: 10px; border-radius: 5px;");
       console.log("Yeni projeler, sistem altyapıları veya teknik işbirlikleri için: iletisim@ecdogan.com");
 </script>
-<script>
-  let tiklamaSayisi = 0;
-  let tiklamaZamanlayici;
-  
-  const killSesleri = [
-    new Audio('kill1.mp3'),
-    new Audio('kill2.mp3'),
-    new Audio('kill3.mp3'),
-    new Audio('kill4.mp3'),
-    new Audio('ace.mp3') 
-  ];
 
-  document.addEventListener('click', () => {
-    if (tiklamaSayisi < 5) {
-      let aktifSes = killSesleri[tiklamaSayisi];
-      aktifSes.currentTime = 0; 
-      
-      
-      aktifSes.play().catch(hata => {
-        console.warn("Ses yüklenemedi veya tarayıcı engelledi: ", hata);
-      });
-      
-      tiklamaSayisi++;
-    }
-
-    clearTimeout(tiklamaZamanlayici);
-    
-    tiklamaZamanlayici = setTimeout(() => { tiklamaSayisi = 0; }, 1500); 
-
-    if (tiklamaSayisi === 5) {
-      document.body.classList.add('siber-sarsinti');
-      
-      setTimeout(() => {
-        document.body.classList.remove('siber-sarsinti');
-        alert("🔥 ACE! 🔥");
-      }, 1500); 
-      
-      tiklamaSayisi = 0; 
-    }
-  });
-</script>
 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" style="position: fixed; bottom: 0; right: 0; width: 5px; height: 5px; opacity: 0; z-index: 9999; cursor: default;"></a>
 </body>
 </html>
